@@ -1,0 +1,29 @@
+// File name: projects/1/Xor.hdl
+/**
+ * Exclusive-or gate:
+ * if ((a and Not(b)) or (Not(a) and b)) out = 1, else out = 0
+ */
+CHIP Xor {
+    IN a, b;
+    OUT out;
+
+    PARTS:
+    Not(in=a , out=notA );
+    Not(in=b , out=notB );
+    And(a=a , b=notB , out=x );
+    And(a=b , b=notA , out=y );
+    Or(a=x , b=y , out=out );
+}
+
+// Optimized
+
+CHIP Xor {
+    IN a, b;
+    OUT out;
+
+    PARTS:
+    Nand(a=a , b=b , out=n );
+    Nand(a=a , b=n , out=x );
+    Nand(a=b , b=n , out=y );
+    Nand(a=x , b=y , out=out );
+}

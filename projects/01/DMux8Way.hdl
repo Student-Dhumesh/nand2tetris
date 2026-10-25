@@ -1,0 +1,25 @@
+// File name: projects/1/DMux8Way.hdl
+/**
+ * 8-way demultiplexor:
+ * [a, b, c, d, e, f, g, h] = [in, 0,  0,  0,  0,  0,  0,  0] if sel = 000
+ *                            [0, in,  0,  0,  0,  0,  0,  0] if sel = 001
+ *                            [0,  0, in,  0,  0,  0,  0,  0] if sel = 010
+ *                            [0,  0,  0, in,  0,  0,  0,  0] if sel = 011
+ *                            [0,  0,  0,  0, in,  0,  0,  0] if sel = 100
+ *                            [0,  0,  0,  0,  0, in,  0,  0] if sel = 101
+ *                            [0,  0,  0,  0,  0,  0, in,  0] if sel = 110
+ *                            [0,  0,  0,  0,  0,  0,  0, in] if sel = 111
+ */
+CHIP DMux8Way {
+    IN in, sel[3];
+    OUT a, b, c, d, e, f, g, h;
+
+    PARTS:
+    DMux(in=in , sel=sel[2] , a=x , b=y );
+    DMux(in=x , sel=sel[1] , a=x1 , b=x2 );
+    DMux(in=y , sel=sel[1] , a=y1 , b=y2 );
+    DMux(in=x1 , sel=sel[0] , a=a , b=b );
+    DMux(in=x2 , sel=sel[0] , a=c , b=d );
+    DMux(in=y1 , sel=sel[0] , a=e , b=f );
+    DMux(in=y2 , sel=sel[0] , a=g , b=h );
+}
