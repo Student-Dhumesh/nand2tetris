@@ -1,6 +1,6 @@
 # Project 1: Boolean Logic
 
-[← All projects](../README.md)
+[All projects](../../README.md)
 
 Build a set of elementary logic gates, using only `Nand` as the starting primitive (and previously built gates after that).
 
